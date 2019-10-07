@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  componentTitle="hello world from component.ts!"; 
+  clickHandler(){
+    alert("you clicked the buttton");
+  }
 }
