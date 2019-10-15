@@ -9,7 +9,7 @@ const app=express();
 
 
 
-mongoose.connect(config.BWM_URI).then(() =>{
+mongoose.connect(config.BWM_URI,{useNewUrlParser:true}).then(() =>{
     const fakeDb=new FakeDb();
     fakeDb.seedDb();
 });

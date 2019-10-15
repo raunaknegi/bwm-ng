@@ -3,14 +3,14 @@ const Rental=require('./models/rental');
 class FakeDb{
     constructor(){
         this.rentals = [{
-            title: "Nice view on ocean",
+            title: "Nice view of ocean",
             city: "San Francisco",
             street: "Main street",
             category: "condo",
             image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
             bedrooms: 4,
             shared: true,
-            description: "Very nice apartment in center of the city.",
+            description: "Very nice condo with view of ocean.",
             dailyRate: 43
             },
             {
@@ -32,7 +32,7 @@ class FakeDb{
             image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
             bedrooms: 5,
             shared: true,
-            description: "Very nice apartment in center of the city.",
+            description: "Very nice house in outskirts of the city.",
             dailyRate: 23
         }]
     }
@@ -50,8 +50,8 @@ class FakeDb{
     }
 
     seedDb(){
-        this.pushToDb();
         this.cleanDb();
+        this.pushToDb();
     }
 }
 
