@@ -1,0 +1,23 @@
+<agm-map
+ (mapready)="mapReadyHandler()"
+ [latitude]="lat"
+ [longitude]="lng"
+ >
+  <agm-circle *ngIf="!islocation && lat &&lng"
+   [latitude]="lat"
+   [longitude]="lng"
+   [radius]="500"
+   [fillColor]="'#484848'"
+   [fillOpacity]="0.3"
+   >
+  </agm-circle>
+
+  <agm-info-window
+    [latitude]="0"
+    [longitude]="0"
+    [maxWidth]="300"
+    [isOpen]=true>
+      There was a problem in locating your request. Please check the location you are requesting or contact the 
+      moderators for additional information.
+  </agm-info-window>
+</agm-map>
