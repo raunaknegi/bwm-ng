@@ -39,7 +39,7 @@ class FakeDb{
 
         this.user=[{
             username:"TestUser",
-            email:"testuser@gmail.com",
+            email:"test@gmail.com",
             password:"testtest"
         }]
     }

@@ -9,6 +9,10 @@ import {HeaderComponent} from './common/header/header.component';
 import { RentalComponent } from './rental/rental.component';
 
 import { RentalModule} from './rental/rental.module';
+import {AuthModule} from './auth/auth.module';
+
+import {AuthService} from './auth/shared/auth.service'
+
 
 
 
@@ -21,16 +25,19 @@ const routes: Routes=[
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    HeaderComponent
     
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     RentalModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
