@@ -100,3 +100,4 @@ exports.authMiddleware=function(req,res,next){
 function parseToken(token){
     return jwt.verify(token.split(' ')[1],config.SECRET);
 }
+

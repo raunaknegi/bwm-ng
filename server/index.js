@@ -6,9 +6,10 @@ const bodyParser=require('body-parser');
 
 
 const rentalRoute=require('./routes/rental');
-const userRoute=require('./routes/user')
+const userRoute=require('./routes/user');
+const bookingRoute=require('./routes/booking');
 
-const Rental=require('./models/rental');
+
 
 const app=express();
 app.use(bodyParser.json());
@@ -17,11 +18,12 @@ app.use(bodyParser.json());
 
 mongoose.connect(config.BWM_URI,{useNewUrlParser:true}).then(() =>{
     const fakeDb=new FakeDb();
-    fakeDb.seedDb();
+    // fakeDb.seedDb();
 });
 
 app.use('/api/rentals',rentalRoute);
 app.use('/api/user',userRoute);
+app.use('/api/booking',bookingRoute);
 
 
 
