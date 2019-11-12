@@ -1,0 +1,11 @@
+import { Rental } from "../../rental/shared/rental.model";
+
+export class Booking{
+    _id:string;
+    startAt:string;
+    endAt:string;
+    TotalPrice:number;
+    guests:number;
+    days:number;
+    rental:Rental;
+}
