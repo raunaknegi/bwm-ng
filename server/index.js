@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 mongoose.connect(config.BWM_URI,{useNewUrlParser:true}).then(() =>{
     const fakeDb=new FakeDb();
-    // fakeDb.seedDb();
+    //fakeDb.seedDb();
 });
 
 app.use('/api/rentals',rentalRoute);
