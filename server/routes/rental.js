@@ -24,7 +24,7 @@ router.get('',function(req,res){
                     return res.status(422).send({ errors: normalizeErrors(err.errors) });
                   }
                   if(city && foundRental.length===0){
-                    return res.status(422).send({errors:[{title:"Could not find city",detail:`the city ${city} was not found`}]});
+                    return res.status(422).send({errors:[{title:"Could not find city",detail:`No rentals were found for ${city}`}]});
                   }
                   return res.json(foundRental)
               });

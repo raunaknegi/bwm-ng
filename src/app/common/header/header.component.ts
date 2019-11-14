@@ -19,4 +19,8 @@ export class HeaderComponent{
         this.authService.logout();
         this.router.navigate(['/login']);
     }
+
+    search(city:String){
+        city ? this.router.navigate([`/rentals/${city}/homes`]) : this.router.navigate(['/']) ;
+    }
 }

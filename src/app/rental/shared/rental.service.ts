@@ -15,4 +15,12 @@ export class RentalServices {
   public getRentals(): Observable<any> {
     return this.http.get('/api/rentals');
   }
+
+  public getRentalsByCity(rentalCity:String):Observable<any>{
+    return this.http.get(`/api/rentals/?city=${rentalCity}`);
+  }
+
+  public createNewRental(newRental:Rental):Observable<any>{
+    return this.http.post('api/rentals',newRental);
+  }
 }
