@@ -6,4 +6,6 @@ const router=express.Router();
 
 router.post('',Routing.authMiddleware,BookingControl.createBooking);
 
+router.get('/manage',Routing.authMiddleware,BookingControl.manageBooking);
+
 module.exports=router;

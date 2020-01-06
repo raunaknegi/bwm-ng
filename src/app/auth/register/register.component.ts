@@ -11,7 +11,7 @@ import {AuthService} from '../shared/auth.service';
 export class RegisterComponent implements OnInit {
 
   formData:any={}
-  errors:any[]=[]
+  errors:any;
   constructor(private auth:AuthService,
               private router:Router) { }
 
@@ -25,8 +25,7 @@ export class RegisterComponent implements OnInit {
         
       },
       (errorResponse)=>{
-       this.errors=errorResponse.error.errors;
-               
+       this.errors=errorResponse.error.errors;               
       }
     )
   }
