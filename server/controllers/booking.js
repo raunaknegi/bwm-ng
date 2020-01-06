@@ -45,6 +45,18 @@ exports.createBooking=function(req,res){
           });    
 }
 
+exports.manageBooking=function(req,res){
+  foundUser=res.locals.foundUser;
+    Booking.where({user:foundUser})
+          .populate('rental')
+          .exec(function(err,foundBooking){
+            if(err){
+                res.status(422).send({errors:[{title:"Rental error",detail:"this page doesn't exist"}]});
+            }
+            res.json(foundBooking);  
+          })
+}
+
 function isValidBooking(proposedBooking,rental){
     let isValid=true;
     if(rental.bookings&&rental.bookings.length>0){
