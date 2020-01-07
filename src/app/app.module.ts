@@ -13,8 +13,11 @@ import {HeaderComponent} from './common/header/header.component';
 
 import { RentalModule} from './rental/rental.module';
 import {AuthModule} from './auth/auth.module';
+import { ManageModule } from './manage/manage.module';
 
-import {AuthService} from './auth/shared/auth.service'
+import {AuthService} from './auth/shared/auth.service';
+
+
 
 
 
@@ -38,7 +41,8 @@ const routes: Routes=[
     AuthModule,
     NgbModule.forRoot(),
     BrowserAnimationsModule,
-    ToastModule.forRoot()
+    ToastModule.forRoot(),
+    ManageModule
   ],
   providers: [
     AuthService

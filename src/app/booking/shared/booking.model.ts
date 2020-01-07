@@ -4,7 +4,7 @@ export class Booking{
     _id:string;
     startAt:string;
     endAt:string;
-    TotalPrice:number;
+    totalPrice:number;
     guests:number;
     days:number;
     rental:Rental;

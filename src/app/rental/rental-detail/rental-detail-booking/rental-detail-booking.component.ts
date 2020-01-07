@@ -111,6 +111,7 @@ export class RentalDetailBookingComponent implements OnInit {
         this.newBooking.startAt= this.helper.bookingDateFormat(value.start);
         this.newBooking.endAt = this.helper.bookingDateFormat(value.end);
         this.newBooking.days=value.end.diff(value.start,'days');
-        this.newBooking.TotalPrice=this.newBooking.days * this.rental.dailyRate;
+        console.log(this.newBooking.days)
+        this.newBooking.totalPrice=this.newBooking.days * this.rental.dailyRate;
   }
 }

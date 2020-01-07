@@ -17,6 +17,8 @@ exports.createBooking=function(req,res){
           .populate('bookings')
           .populate('user')
           .exec(function(err,foundRental){
+
+              
               if(err){
                 return res.status(422).send({ errors: normalizeErrors(err.errors) });
               }
@@ -36,7 +38,8 @@ exports.createBooking=function(req,res){
 
                     foundRental.save();
                     User.update({_id:foundUser.id},{$push:{bookings:booking}},function(){});
-                    return  res.json({startAt:booking.startAt,endAt:booking.endAt})
+                    return  res.json({startAt:booking.startAt,endAt:booking.endAt,user:foundUser.id,
+                     owner: foundRental.user.id})
                 });                 
                   
               }else{
@@ -51,7 +54,9 @@ exports.manageBooking=function(req,res){
           .populate('rental')
           .exec(function(err,foundBooking){
             if(err){
+
                 res.status(422).send({errors:[{title:"Rental error",detail:"this page doesn't exist"}]});
+
             }
             res.json(foundBooking);  
           })
