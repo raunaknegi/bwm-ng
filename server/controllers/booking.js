@@ -17,6 +17,8 @@ exports.createBooking=function(req,res){
           .populate('bookings')
           .populate('user')
           .exec(function(err,foundRental){
+
+              
               if(err){
                 return res.status(422).send({ errors: normalizeErrors(err.errors) });
               }
@@ -36,13 +38,26 @@ exports.createBooking=function(req,res){
 
                     foundRental.save();
                     User.update({_id:foundUser.id},{$push:{bookings:booking}},function(){});
-                    return  res.json({startAt:booking.startAt,endAt:booking.endAt})
+                    return  res.json({startAt:booking.startAt,endAt:booking.endAt,user:foundUser.id,
+                     owner: foundRental.user.id})
                 });                 
                   
               }else{
                 return res.status(422).send({ errors: [{ title: "Invalid dates", detail: "the dates are already taken" }] });   
               }
           });    
+}
+
+exports.manageBooking=function(req,res){
+  foundUser=res.locals.foundUser;
+    Booking.where({user:foundUser})
+          .populate('rental')
+          .exec(function(err,foundBooking){
+            if(err){
+                res.status(422).send({errors: normalizeErrors(err.errors)});
+            }
+            res.json(foundBooking);  
+          })
 }
 
 function isValidBooking(proposedBooking,rental){

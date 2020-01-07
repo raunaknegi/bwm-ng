@@ -13,4 +13,7 @@ export class BookingService{
     public confirmBooking(booking:Booking) :Observable<any>{
         return this.http.post('/api/booking',booking);  
     }
+    public manageBooking():Observable<any>{
+        return this.http.get('/api/booking/manage');
+    }
 }
