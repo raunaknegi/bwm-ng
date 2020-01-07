@@ -10,6 +10,7 @@ router.get('/secrets',userControl.authMiddleware,function(req,res){
     res.json({"secret":true})
 })
 
+
 router.get('/manage',userControl.authMiddleware,function(req,res){
   foundUser=res.locals.foundUser;
   Rental.where({user:foundUser})
@@ -87,10 +88,6 @@ router.get('',function(req,res){
 
     
 });
-
-
-
-
 
 
 

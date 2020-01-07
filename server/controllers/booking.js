@@ -54,7 +54,9 @@ exports.manageBooking=function(req,res){
           .populate('rental')
           .exec(function(err,foundBooking){
             if(err){
-                res.status(422).send({errors: normalizeErrors(err.errors)});
+
+                res.status(422).send({errors:[{title:"Rental error",detail:"this page doesn't exist"}]});
+
             }
             res.json(foundBooking);  
           })
