@@ -1,11 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {NgPipesModule} from 'ngx-pipes';
+import {NgPipesModule,UcWordsPipe} from 'ngx-pipes';
 import {FormsModule} from '@angular/forms';
 import {Routes,RouterModule} from '@angular/router';
 import {MapModule} from '../common/map/map.module';
 import { Daterangepicker } from 'ng2-daterangepicker';
+import {EditableModule} from '../common/components/editable/editable.module';
 
 
 import { RentalListComponent } from './rental-list/rental-list.component';
@@ -21,6 +22,9 @@ import { helperService } from '../common/service/helper.service';
 import {BookingService} from '../booking/shared/booking.service';
 
 import {AuthGuard} from '../auth/shared/auth.guard';
+import {RentalGuard} from './shared/rental.guard';
+import { RentalUpdateComponent } from './rental-update/rental-update.component';
+import { from } from 'rxjs/observable/from';
 
 
                                       
@@ -32,6 +36,7 @@ const routes: Routes=[
         {path:'',component:RentalListComponent},
         {path:'new',component:RentalCreateComponent,canActivate:[AuthGuard]},
         {path:':rentalId',component:RentalDetailComponent},
+        {path:':rentalId/edit',component:RentalUpdateComponent,canActivate:[AuthGuard,RentalGuard]},
         {path:':city/homes',component:RentalSearchComponent}
         
     ]}
@@ -46,7 +51,8 @@ const routes: Routes=[
         RentalDetailComponent,
         RentalDetailBookingComponent,
         RentalSearchComponent,
-        RentalCreateComponent
+        RentalCreateComponent,
+        RentalUpdateComponent
     ],
         
     imports:[
@@ -56,12 +62,15 @@ const routes: Routes=[
        NgPipesModule,
        MapModule,
        Daterangepicker,
-       FormsModule
+       FormsModule,
+       EditableModule
     ],
     providers:[
         RentalServices,
         helperService,
-        BookingService
+        BookingService,
+        UcWordsPipe,
+        RentalGuard
     ]
 })
 
