@@ -18,11 +18,6 @@ import { ManageModule } from './manage/manage.module';
 import {AuthService} from './auth/shared/auth.service';
 
 
-
-
-
-
-
 const routes: Routes=[
   {path:'', redirectTo:'/rentals',pathMatch:'full'},
 ]
@@ -31,7 +26,7 @@ const routes: Routes=[
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,    
+    HeaderComponent   
   ],
   imports: [
     RouterModule.forRoot(routes),
