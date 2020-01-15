@@ -8,6 +8,7 @@ const bodyParser=require('body-parser');
 const rentalRoute=require('./routes/rental');
 const userRoute=require('./routes/user');
 const bookingRoute=require('./routes/booking');
+const imageUploadRoute=require('./routes/image-upload');
 
 
 
@@ -24,6 +25,7 @@ mongoose.connect(config.BWM_URI,{useNewUrlParser:true}).then(() =>{
 app.use('/api/rentals',rentalRoute);
 app.use('/api/user',userRoute);
 app.use('/api/booking',bookingRoute);
+app.use('/api',imageUploadRoute);
 
 
 

@@ -18,13 +18,19 @@ export class RentalCreateComponent implements OnInit {
   constructor(private rentalService:RentalServices,
               private router:Router) { }
 
-  handleImage(){
-    this.rental.image="https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg";
-  }
+  
 
   ngOnInit() {
     this.rental=new Rental();
     this.rental.shared=false;
+  }
+
+  handleImage(imageUrl:string){
+    if(imageUrl!='FAIL'){
+      this.rental.image=imageUrl;
+    }else{
+      this.rental.image=undefined;
+    }
   }
 
   createRental(){

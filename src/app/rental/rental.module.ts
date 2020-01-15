@@ -7,6 +7,7 @@ import {Routes,RouterModule} from '@angular/router';
 import {MapModule} from '../common/map/map.module';
 import { Daterangepicker } from 'ng2-daterangepicker';
 import {EditableModule} from '../common/components/editable/editable.module';
+import { ImageUploadModule } from '../common/components/image-upload/image-upload.module';
 
 
 import { RentalListComponent } from './rental-list/rental-list.component';
@@ -24,7 +25,7 @@ import {BookingService} from '../booking/shared/booking.service';
 import {AuthGuard} from '../auth/shared/auth.guard';
 import {RentalGuard} from './shared/rental.guard';
 import { RentalUpdateComponent } from './rental-update/rental-update.component';
-import { from } from 'rxjs/observable/from';
+
 
 
                                       
@@ -63,7 +64,8 @@ const routes: Routes=[
        MapModule,
        Daterangepicker,
        FormsModule,
-       EditableModule
+       EditableModule,
+       ImageUploadModule
     ],
     providers:[
         RentalServices,
