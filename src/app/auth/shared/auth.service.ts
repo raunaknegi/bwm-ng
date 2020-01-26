@@ -60,6 +60,10 @@ export class AuthService {
        return this.decodedToken.userName;
     }
 
+    public getUserId(){
+        return this.decodedToken.userId;
+    }
+
 
     
 }

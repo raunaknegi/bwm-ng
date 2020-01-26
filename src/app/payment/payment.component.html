@@ -1,0 +1,25 @@
+<form [ngClass]="isValidatingCard ? 'loading':''">
+  <div class="group">
+    <label>
+      <span>Card Number</span>
+      <div #cardNumber class="field"></div>
+    </label>
+    <label>
+      <span>Expiry Date</span>
+      <div #cardExpiry class="field"></div>
+    </label>
+    <label>
+      <span>CVV</span>
+      <div #cardCVV class="field"></div>
+    </label>
+  </div>
+  <div class="outcome">
+    <div *ngIf="error && error.length>0" class="error">
+      {{error}}
+    </div>
+    <div *ngIf="token" class="success alert alert-success">
+      Card Accepted Sucessfully!
+    </div>
+  </div>
+  <button [disabled]="!isCardValid()" (click)="onSubmit()" type="button">Submit for free!</button>
+</form>

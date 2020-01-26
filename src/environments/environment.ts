@@ -4,5 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  STRIPE_PK:'pk_test_2h1iSBrzT0nTG1ZaRR4l0W4K00KvPy6Tqk'
 };

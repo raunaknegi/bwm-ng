@@ -3,7 +3,7 @@ const Routing=require('../controllers/routing');
 const BookingControl=require('../controllers/booking');
 
 const router=express.Router();
-
+debugger;
 router.post('',Routing.authMiddleware,BookingControl.createBooking);
 router.get('/manage',Routing.authMiddleware,BookingControl.manageBooking);
 

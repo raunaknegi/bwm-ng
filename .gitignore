@@ -16,7 +16,6 @@
 .c9/
 *.launch
 .settings/
-*.sublime-workspace
 
 # IDE - VSCode
 .vscode/*
@@ -43,4 +42,4 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/server/config
+/server/config/dev.js
