@@ -29,7 +29,10 @@ const userSchema=new Schema({
     }],
     bookings:[{
         type:Schema.Types.ObjectId,ref:'Booking'
-    }]
+    }],
+    stripeCustomerId:String,
+    revenue:Number
+
 })
 
 

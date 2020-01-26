@@ -41,8 +41,8 @@
     "ngx-image-cropper": "^2.0.4",
     "ngx-pipes": "^2.5.6",
     "node-sass": "^4.12.0",
-    "nodemon": "^1.19.3",
     "rxjs": "^5.5.6",
+    "stripe": "^8.4.1",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
@@ -60,6 +60,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "nodemon": "^1.19.4",
     "protractor": "~5.1.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",

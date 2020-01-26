@@ -9,6 +9,7 @@ const rentalRoute=require('./routes/rental');
 const userRoute=require('./routes/user');
 const bookingRoute=require('./routes/booking');
 const imageUploadRoute=require('./routes/image-upload');
+const paymentRoute=require('./routes/payments');
 
 
 
@@ -26,6 +27,7 @@ app.use('/api/rentals',rentalRoute);
 app.use('/api/user',userRoute);
 app.use('/api/booking',bookingRoute);
 app.use('/api',imageUploadRoute);
+app.use('/api/payment',paymentRoute)
 
 
 
