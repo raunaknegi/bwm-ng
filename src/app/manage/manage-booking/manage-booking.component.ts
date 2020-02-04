@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BookingService } from '../../booking/shared/booking.service';
 import { Booking } from '../../booking/shared/booking.model';
 import { PaymentService } from '../../payment/shared/payment.service';
+import moment = require('moment');
 
 @Component({
   selector: 'bwm-manage-booking',
@@ -17,9 +18,14 @@ export class ManageBookingComponent implements OnInit {
               private paymentService:PaymentService) { }
 
   ngOnInit() {
-    this.bookingService.manageBooking().subscribe((booking:Booking[])=>{
+    this.bookingService.manageBooking().subscribe(
+      (booking:Booking[])=>{
       this.bookings=booking;
-    });
+    },
+    (err)=>{
+      console.log(err);
+    }
+    );
     this.pendingPayment();
   }
 
@@ -35,10 +41,10 @@ export class ManageBookingComponent implements OnInit {
   }
 
   acceptPayment(payment){
-    
     this.paymentService.acceptPayments(payment).subscribe(
       (data)=>{
-
+        payment.status='paid'
+        console.log(payment.status);
       },
       (err)=>{
 
@@ -49,11 +55,23 @@ export class ManageBookingComponent implements OnInit {
   declinePayment(payment){
     this.paymentService.declinePayments(payment).subscribe(
       (data)=>{
-
+        payment.status='declined';
+        console.log(payment.status);
       },
       (err)=>{
 
       }
     )
+  }
+
+  isExpired(endAtString){
+    const timeNow=moment();
+    const endAt=moment(endAtString);
+    return endAt.isBefore(timeNow);
+  }
+
+  reviewPublished(bookingIndex,review){
+    debugger;
+    this.bookings[bookingIndex]['review']=review;
   }
 }

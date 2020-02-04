@@ -6,24 +6,24 @@ const config=require('../config/dev');
 
 exports.getUser=function(req,res){
     const requestedUserId=req.params.id;
-    const foundUser=res.locals.foundUser;
+    const user=res.locals.user;
 
-    if(requestedUserId===foundUser.id){
-        User.findById(requestedUserId,function(err,foundUser){
+    if(requestedUserId===user.id){
+        User.findById(requestedUserId,function(err,user){
             if(err){
                 return res.status(422).send({ errors: normalizeErrors(err.errors) });
             }
 
-            return res.json(foundUser);
+            return res.json(user);
         })
     }else{
         User.findById(requestedUserId)
             .select('-revenue -password -_id -bookings')
-            .exec(function(err,foundUser){
+            .exec(function(err,user){
                 if(err){
                     return res.status(422).send({ errors: normalizeErrors(err.errors) });
                 }
-                return res.json(foundUser);
+                return res.json(user);
             })
     }
 }
@@ -36,22 +36,22 @@ exports.auth = function (req, res) {
         return res.status(422).send({ errors: [{ title: "Missing data", detail: "email or password is missing" }] });
     }
 
-    User.findOne({ email }, function (err, foundUser) {
+    User.findOne({ email }, function (err, user) {
         if (err) {
             return res.status(422).send({ errors: normalizeErrors(err.errors) });
         };
 
-        if (!foundUser) {
+        if (!user) {
             return res.status(422).send({ errors: [{ title: "Invalid data", detail: "the user doesnt exist" }] });
         };
 
-        if (!foundUser.passwordCheck(password)) {
+        if (!user.passwordCheck(password)) {
             return res.status(422).send({ errors: [{ title: "Invalid data", detail: "email or password is invalid" }] });
         } else {
 
             const token = jwt.sign({
-                userId:foundUser.id,
-                userName:foundUser.username
+                userId:user.id,
+                userName:user.username
             }, config.SECRET, { expiresIn: '1h' });
             return res.json(token);
         }
@@ -70,11 +70,11 @@ exports.register = function (req, res) {
         return res.status(422).send({ errors: [{ title: "Password error", detail: "Passwrods dont match" }] });
     }
 
-    User.findOne({ email }, function (err, foundUser) {
+    User.findOne({ email }, function (err, existingUser) {
         if (err) {
             return res.status(422).send({ errors: normalizeErrors(err.errors) });
         }
-        if (foundUser) {
+        if (existingUser) {
             return res.status(422).send({ errors: [{ title: "User error", detail: "user with this email exists" }] });
         };
         const user = new User({
@@ -104,12 +104,12 @@ exports.authMiddleware=function(req,res,next){
     if(token){
         const user=parseToken(token)
 
-        User.findById(user.userId,function(err,foundUser){
+        User.findById(user.userId,function(err,user){
             if(err){
                 return res.status(422).send({ errors: normalizeErrors(err.errors) });
             }
-            if(foundUser){
-                res.locals.foundUser=foundUser;
+            if(user){
+                res.locals.user=user;
                 next();
             }else{
                 return res.status(401).send({ errors: [{ title: "Not authorized", detail: "you need to login again" }] });

@@ -10,7 +10,7 @@ const stripe = require('stripe')(config.STRIPE_SK);
 exports.createBooking=function(req,res){
 
     const {startAt,endAt,totalPrice,days,guests,rental,paymentToken}=req.body;
-    const foundUser=res.locals.foundUser;   //from authMiddleware, stored as foundUser
+    const user=res.locals.user;   //from authMiddleware, stored as foundUser
 
     const booking=new Booking({startAt,endAt,totalPrice,days,guests});
 
@@ -24,12 +24,12 @@ exports.createBooking=function(req,res){
               if(err){
                 return res.status(422).send({ errors: normalizeErrors(err.errors) });
               }
-              if(foundRental.user.id===foundUser.id){
+              if(foundRental.user.id===user.id){
                 return res.status(422).send({ errors: [{ title: "Invalid data", detail: "the user cannot book his own Rental" }] });
               }
               if(isValidBooking(booking,foundRental)){
                 debugger;
-                booking.user=foundUser;
+                booking.user=user;
                 booking.rental=foundRental;
                 foundRental.bookings.push(booking);
                 const {payment,err}=await createPayment(booking,foundRental.user,paymentToken);
@@ -42,8 +42,8 @@ exports.createBooking=function(req,res){
                       }
   
                       foundRental.save();
-                      User.update({_id:foundUser.id},{$push:{bookings:booking}},function(){});
-                      return  res.json({startAt:booking.startAt,endAt:booking.endAt,user:foundUser.id,
+                      User.update({_id:user.id},{$push:{bookings:booking}},function(){});
+                      return  res.json({startAt:booking.startAt,endAt:booking.endAt,user:user.id,
                        owner: foundRental.user.id})
                   });
                 }else if(err){
@@ -57,14 +57,12 @@ exports.createBooking=function(req,res){
 }
 
 exports.manageBooking=function(req,res){
-  foundUser=res.locals.foundUser;
-    Booking.where({user:foundUser})
+  const user=res.locals.user;
+    Booking.where({user:user})
           .populate('rental')
           .exec(function(err,foundBooking){
             if(err){
-
                 res.status(422).send({errors:[{title:"Rental error",detail:"this page doesn't exist"}]});
-
             }
             res.json(foundBooking);  
           });

@@ -7,7 +7,7 @@ aws.config.update({
     secretAccessKey:config.aws_SECRET_ACCESS_KEY,
     accessKeyId:config.aws_ACCESS_KEY,
     region:'us-east-2'
-})
+}) 
  
 const s3 = new aws.S3()
 
