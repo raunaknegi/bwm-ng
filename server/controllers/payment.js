@@ -8,10 +8,10 @@ const stripe = require('stripe')(config.STRIPE_SK);
 
 
 exports.getPendingPayments=function(req,res){
-    const foundUser=res.locals.foundUser;
+    const user=res.locals.user;
 
     Payment
-        .where({toUser:foundUser})
+        .where({toUser:user})
         .populate({
             path:'booking',
             populate:{path:'rental'}
@@ -27,7 +27,7 @@ exports.getPendingPayments=function(req,res){
 
 exports.confirmPayment=function(req,res){
     const payment=req.body;
-    const foundUser=res.locals.foundUser;
+    const user=res.locals.user;
 
     Payment.findById(payment._id)
            .populate('toUser')
@@ -36,7 +36,7 @@ exports.confirmPayment=function(req,res){
             if(err){
                 return res.status(422).send({ errors: normalizeErrors(err.errors) });
             }
-            if(foundPayment.status==='pending' && foundUser.id===foundPayment.toUser.id){
+            if(foundPayment.status==='pending' && user.id===foundPayment.toUser.id){
                 debugger;
                 const booking=foundPayment.booking;
 

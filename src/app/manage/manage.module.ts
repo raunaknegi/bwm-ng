@@ -1,6 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Routes,RouterModule} from '@angular/router';
+import { ReviewModule } from '../review/review.module';
+
+
 import { ManageRentalComponent } from './manage-rental/manage-rental.component';
 import {ManageBookingComponent} from './manage-booking/manage-booking.component';
 import { ManageComponent } from './manage.component';
@@ -36,8 +39,8 @@ const routes:Routes=[
     imports:[
        CommonModule,
        RouterModule.forChild(routes),
-       NgPipesModule
-      
+       NgPipesModule,
+       ReviewModule
     ],
     providers:[
         RentalServices,

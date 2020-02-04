@@ -38,7 +38,7 @@ export class RentalDetailBookingComponent implements OnInit {
     alwaysShowCalendars: false,
     opens:'left',
     autoUpdateInput:false,
-    isInvalidDate:this.getInvalidDates.bind(this)
+    // isInvalidDate:this.getInvalidDates.bind(this)
 };
 
 
@@ -87,7 +87,6 @@ export class RentalDetailBookingComponent implements OnInit {
 
   onPaymentConfirmed(paymentToken:any){
     this.newBooking.paymentToken=paymentToken;
-    console.log(this.newBooking);
   }
 
   createBooking(){
@@ -116,7 +115,6 @@ export class RentalDetailBookingComponent implements OnInit {
         this.newBooking.startAt= this.helper.bookingDateFormat(value.start);
         this.newBooking.endAt = this.helper.bookingDateFormat(value.end);
         this.newBooking.days=value.end.diff(value.start,'days');
-        console.log(this.newBooking.days)
         this.newBooking.totalPrice=this.newBooking.days * this.rental.dailyRate;
   }
 }

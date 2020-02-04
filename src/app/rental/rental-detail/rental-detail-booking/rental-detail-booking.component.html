@@ -33,10 +33,10 @@
   </p>
 </div>
 
-<ng-template #content let-modal>
+<ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Confirm Booking</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -56,7 +56,7 @@
   </div>
   <div class="modal-footer">
     <button [disabled]="!newBooking.paymentToken" type="button" class="btn btn-bwm" (click)="createBooking()">Confirm</button>
-    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>
 

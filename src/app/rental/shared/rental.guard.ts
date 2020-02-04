@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {catchError, map} from 'rxjs/operators';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import {Observable} from 'rxjs';
 import { RentalServices } from './rental.service';
@@ -10,11 +11,11 @@ export class RentalGuard implements CanActivate {
 
   canActivate(router:ActivatedRouteSnapshot,state:RouterStateSnapshot): Observable<boolean>{
         const rentalId=router.params.rentalId;
-        return this.rentalService.verifyRentalUser(rentalId).map(()=>{
+        return this.rentalService.verifyRentalUser(rentalId).pipe(map(()=>{
             return true;
-        }).catch(()=>{
+        }),catchError(()=>{
             this.router.navigate(['/rentals']);
             return Observable.of(false);
-        });
+        }),)
     }
 }

@@ -24,7 +24,7 @@ export class RentalCreateComponent implements OnInit {
     this.rental=new Rental();
     this.rental.shared=false;
   }
-
+ 
   handleImage(imageUrl:string){
     if(imageUrl!='FAIL'){
       this.rental.image=imageUrl;

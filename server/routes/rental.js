@@ -12,8 +12,8 @@ router.get('/secrets',userControl.authMiddleware,function(req,res){
 
 
 router.get('/manage',userControl.authMiddleware,function(req,res){
-  foundUser=res.locals.foundUser;
-  Rental.where({user:foundUser})
+  const user=res.locals.user;
+  Rental.where({user:user})
         .populate('bookings')
         .exec(function(err,foundRental){
           if(err){
@@ -24,14 +24,14 @@ router.get('/manage',userControl.authMiddleware,function(req,res){
 });
 
 router.get('/:id/verify-user',userControl.authMiddleware,function(req,res){
-  const foundUser=res.locals.foundUser;
+  const user=res.locals.user;
   Rental.findById(req.params.id)
         .populate('user')
         .exec(function(err,foundRental){
             if(err){
               return res.status(422).send({ errors: normalizeErrors(err.errors) });
           }
-            if(foundRental.user.id != foundUser.id){
+            if(foundRental.user.id != user.id){
               return res.status(422).send({errors:[{title:"Invalid user",detail:'you are not the owner of the Rental'}]});
           }
 
@@ -46,7 +46,7 @@ router.get('/:id',function(req,res){
         .populate('user','username -_id')
         .populate('bookings','startAt endAt -_id')
         .exec(function(err,foundRentals){
-          if(err){
+          if(err|| !foundRentals){
               res.status(422).send({errors:[{title:"Rental error",detail:"this page doesn't exist"}]});
           }
           res.json(foundRentals);
@@ -54,10 +54,8 @@ router.get('/:id',function(req,res){
 });
 
 router.patch('/:id',userControl.authMiddleware,function(req,res){
-  const foundUser=res.locals.foundUser;
+  const user=res.locals.user;
   const rentalData=req.body;
-
-  console.log(rentalData);
 
   Rental.findById(req.params.id)
         .populate('user')
@@ -66,7 +64,7 @@ router.patch('/:id',userControl.authMiddleware,function(req,res){
             return res.status(422).send({ errors: normalizeErrors(err.errors) });
           }
 
-          if(foundRental.user.id != foundUser.id){
+          if(foundRental.user.id != user.id){
             return res.status(422).send({errors:[{title:"Invalid user",detail:`you are not the owner of the Rental ${foundRental.title}`}]});
           }
 
@@ -83,7 +81,7 @@ router.patch('/:id',userControl.authMiddleware,function(req,res){
 });
 
 router.delete('/:id',userControl.authMiddleware,function(req,res){
-  const foundUser=res.locals.foundUser;
+  const user=res.locals.user;
 
   Rental.findById(req.params.id)
         .populate('user','_id')
@@ -96,7 +94,7 @@ router.delete('/:id',userControl.authMiddleware,function(req,res){
             if(err){
               return res.status(422).send({ errors: normalizeErrors(err.errors) });
             }
-            if(foundUser.id != foundRental.user.id){
+            if(user.id != foundRental.user.id){
               return res.status(422).send({errors:[{title:"Invalid user",detail:`you are not the owner of the Rental ${foundRental.title}`}]});
             }
 
@@ -138,16 +136,16 @@ router.get('',function(req,res){
 
 router.post('',userControl.authMiddleware,function(req,res){
     const {title,city,street,category,image,bedrooms,shared,description,dailyRate,createdAt}=req.body;
-    const foundUser=res.locals.foundUser;
+    const user=res.locals.user;
 
     const rental=new Rental({title,city,street,category,image,bedrooms,shared,description,dailyRate,createdAt});
-    rental.user=foundUser;
+    rental.user=user;
     Rental.create(rental,function(err,createdRental){
         if(err){
             return res.status(422).send({ errors: normalizeErrors(err.errors) });
         }
         
-        User.update({_id:foundUser.id},{$push:{rentals:createdRental}},function(){});
+        User.update({_id:user.id},{$push:{rentals:createdRental}},function(){});
 
         return res.json(createdRental)
     })

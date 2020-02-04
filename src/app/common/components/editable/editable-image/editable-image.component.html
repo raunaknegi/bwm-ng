@@ -1,0 +1,7 @@
+<img *ngIf="!isActiveInput" class="img-preview" [src]="entity[entityField]">
+
+<bwm-image-upload
+         (imageUploaded)="handleImage($event)"
+         (imageLoadedToContainer)="handleImageLoad"
+         (uploadCancel)="handleCancel()">
+</bwm-image-upload>

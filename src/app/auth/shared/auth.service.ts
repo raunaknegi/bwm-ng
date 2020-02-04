@@ -1,3 +1,4 @@
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -12,12 +13,11 @@ class DecodedToken{
 
 @Injectable()
 export class AuthService {
+    private decodedToken;
 
     constructor(private http:HttpClient){ 
         this.decodedToken=JSON.parse(localStorage.getItem('bwm_meta'))||new DecodedToken();
     };
-
-    private decodedToken;
 
     private saveToken(token:string): string{
         this.decodedToken=jwt.decode(token)
@@ -36,10 +36,10 @@ export class AuthService {
     };
 
     public loginService(loginData:any):Observable<any>{
-        return this.http.post('/api/user/auth',loginData).map(
+        return this.http.post('/api/user/auth',loginData).pipe(map(
             (token:string)=>{
                 return this.saveToken(token)
-             });             
+             }));             
     }
     
     public isAuthenticated():boolean{

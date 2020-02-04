@@ -20,6 +20,7 @@ import {AuthService} from './auth/shared/auth.service';
 
 
 
+
 const routes: Routes=[
   {path:'', redirectTo:'/rentals',pathMatch:'full'},
 ]

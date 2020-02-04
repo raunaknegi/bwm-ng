@@ -23,7 +23,6 @@ export class ManageRentalComponent implements OnInit {
   ngOnInit() {
     this.rentalService.manageRentals().subscribe((rentals:Rental[])=>{
       this.rentals=rentals;
-      console.log(rentals);
     });
   }
 
@@ -34,7 +33,6 @@ export class ManageRentalComponent implements OnInit {
       this.deleteRentalIndex=undefined;
     },
     (errorResponse)=>{
-      console.log(errorResponse);
       this.toastr.error(errorResponse.error.errors[0].detail,'Failed');
     })
   }

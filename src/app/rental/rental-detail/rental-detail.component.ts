@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Rental} from '../shared/rental.model';
 import {RentalServices} from '../shared/rental.service';
+import { ReviewService } from '../../review/shared/review.service';
+import { Review } from '../../review/shared/review.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'bwm-rental-detail',
@@ -10,10 +13,13 @@ import {RentalServices} from '../shared/rental.service';
 })
 export class RentalDetailComponent implements OnInit {
 
-  rental:Rental
+  rental:Rental;
+  reviews:Review[]=[];
+  rating:number;
 
   constructor(private route:ActivatedRoute,
-              private rentalService:RentalServices)
+              private rentalService:RentalServices,
+              private reviewService:ReviewService)
               { }
 
   ngOnInit() {
@@ -28,9 +34,31 @@ export class RentalDetailComponent implements OnInit {
       this.rentalService.getRentalsById(rentalId).subscribe(
         (rental:Rental)=> {
           this.rental=rental;
+          this.getRentalReviews(rental._id);
+          this.getRentalRating(rental._id)
         }
       )
 
+    }
+
+    formatDate(date){
+      return `${moment(date).fromNow()}`;
+    }
+
+    getRentalReviews(rentalId){
+      this.reviewService.getReviews(rentalId).subscribe(
+        (reviews)=>{
+          this.reviews=reviews;
+        }
+      )
+    }
+
+    getRentalRating(rentalId){
+      this.reviewService.getRating(rentalId).subscribe(
+      (rating)=>{ 
+        this.rating=rating;
+      }
+      )
     }
   
     
