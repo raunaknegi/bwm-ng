@@ -3,6 +3,7 @@
     img {
       width: 100%;
     }
+
     margin-bottom: 30px;
   }
 
@@ -16,15 +17,17 @@
         margin: 0;
       }
 
-      &-owner{
+      &-owner {
         float: right;
-        img{
+
+        img {
           height: 50px;
           border-radius: 50%;
-          display:block;
+          display: block;
           margin: 0 auto;
         }
-        span{
+
+        span {
           display: block;
           font-size: 13px;
           font-weight: 300;
@@ -33,7 +36,7 @@
 
       &-title {
         margin-bottom: 5px;
-        font-size: 28px;
+        font-size: 32px;
         font-weight: 700;
       }
 
@@ -49,6 +52,14 @@
         margin-bottom: 20px;
       }
 
+      &-rating {
+        > span {
+          font-size: 31px;
+          font-weight: bold;
+          color: #ff8a8a;
+        }
+      }
+
       &-room-info {
         margin-bottom: 20px;
         font-weight: 300;
@@ -58,7 +69,7 @@
           margin-right: 10px;
         }
 
-        .rental-bedrooms{
+        .rental-bedrooms {
           margin-right: 0;
         }
 
@@ -69,7 +80,7 @@
 
       &-description {
         font-weight: 300;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
       }
 
       &-assets {

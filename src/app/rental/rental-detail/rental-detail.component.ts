@@ -35,7 +35,7 @@ export class RentalDetailComponent implements OnInit {
         (rental:Rental)=> {
           this.rental=rental;
           this.getRentalReviews(rental._id);
-          this.getRentalRating(rental._id)
+          this.getRentalRating(rental._id);
         }
       )
 

@@ -38,7 +38,7 @@ export class RentalDetailBookingComponent implements OnInit {
     alwaysShowCalendars: false,
     opens:'left',
     autoUpdateInput:false,
-    // isInvalidDate:this.getInvalidDates.bind(this)
+    isInvalidDate:this.getInvalidDates.bind(this)
 };
 
 
