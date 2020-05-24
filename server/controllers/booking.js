@@ -4,7 +4,7 @@ const Payment=require('../models/payment');
 const User=require('../models/user');
 const { normalizeErrors } = require('../helpers/mongoose');
 const moment=require('moment');
-const config=require('../config/dev')
+const config=require('../config')
 const stripe = require('stripe')(config.STRIPE_SK);
 
 exports.createBooking=function(req,res){

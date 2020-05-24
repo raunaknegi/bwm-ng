@@ -15,7 +15,7 @@ import {CommonModule} from '@angular/common';
     ],
     imports:[
         AgmCoreModule.forRoot({
-            apiKey:'AIzaSyBvIMyw9PGlpxLU5BWw_XgpnkCooN4_KiQ'
+            apiKey:'AIzaSyAmYTjfQj0iggoS4MU5cfGQHEVdf-s1NU4'
         }),
         CommonModule
     ],

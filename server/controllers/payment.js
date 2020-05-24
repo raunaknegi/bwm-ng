@@ -3,7 +3,7 @@ const Booking=require('../models/booking');
 const Rental=require('../models/rental');
 const User=require('../models/user');
 const { normalizeErrors } = require('../helpers/mongoose');
-const config=require('../config/dev')
+const config=require('../config')
 const stripe = require('stripe')(config.STRIPE_SK);
 
 

@@ -1,7 +1,7 @@
 const jwt=require('jsonwebtoken');
 const User = require('../models/user');
 const { normalizeErrors } = require('../helpers/mongoose');
-const config=require('../config/dev');
+const config=require('../config');
 
 
 exports.getUser=function(req,res){
