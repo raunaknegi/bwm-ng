@@ -33,7 +33,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.2",
     "@types/jquery": "^3.2.12",
     "angular-star-rating": "^4.0.0-beta.3",
-    "aws-sdk": "^2.601.0",
+    "aws-sdk": "^2.814.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
