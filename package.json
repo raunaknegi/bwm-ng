@@ -50,7 +50,7 @@
     "ng2-toastr": "^4.1.2",
     "ngx-image-cropper": "^1.0.1",
     "ngx-pipes": "^2.5.6",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "rxjs": "^5.5.6",
     "stripe": "^8.4.1",
     "zone.js": "^0.8.19",
